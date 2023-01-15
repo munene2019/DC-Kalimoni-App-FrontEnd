@@ -1,6 +1,4 @@
-package com.example.invoiceapplication;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.LoanApp;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -17,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -29,46 +29,57 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class loanApplication_page extends AppCompatActivity {
-    Button btnApply;
+public class Registration_page extends AppCompatActivity {
+    Button btnSignup;
+    EditText text;
     Dialog dialog;
     String mess;
     String statusCode;
     private static final String BASE_URL = "http://192.168.1.6:7001/Login_RegistrationAPI/";
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_loan);
-        btnApply = findViewById(R.id.btnApply);
-        btnApply.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.registration_page);
+        btnSignup = findViewById(R.id.signup);
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               CallRetrofit();
+               // Log.i("errrrror","her2222e");
+                 CallRetrofit();
             }
         });
 
 
-    }
 
+
+    }
     private void CallRetrofit() {
-        EditText nationalID2= findViewById(R.id.nationalid);
-        String natioalID=nationalID2.getText().toString();
-        EditText phonenumber2 = findViewById(R.id.phonenumber);
-        String phonenumber=phonenumber2.getText().toString();
-        EditText loanAmount2 = findViewById(R.id.loanamount);
-        String loanAmount=loanAmount2.getText().toString();
-        String service = "apply loan";
-        //String LoanAccount="";
+       // Log.i("errrrror","here");
+        EditText firstname1 = findViewById(R.id.firstName);
+        String firstname=firstname1.getText().toString();
+        EditText lastName1 = findViewById(R.id.secondName);
+        String lastName=lastName1.getText().toString();
+        EditText PhoneNumber1 = findViewById(R.id.mobilenumber);
+        String PhoneNumber =PhoneNumber1.getText().toString();
+        EditText nationalID1 = findViewById(R.id.nationalID);
+        String nationalID=nationalID1.getText().toString();
+
+//        String firstname =findViewById(R.id.firstName).toString();
+//        String secondname =findViewById(R.id.secondName).toString();
+//        String mobilenumber =findViewById(R.id.mobilenumber).toString();
+//        String nationalID=findViewById(R.id.nationalID).toString();
+       // String email=findViewById(R.id.accountnumber3).toString();
+        String service = "registration";
+
         JSONObject jsonRequest = new JSONObject();
         try {
-            jsonRequest.put("service",service);
-            // jsonRequest.put("phoneNumber", phoneNumber2);
-            jsonRequest.put("NationalID", natioalID);
-            jsonRequest.put("LoanAmount", loanAmount);
-            jsonRequest.put("PhoneNumber", phonenumber);
-            //jsonRequest.put("LoanAccount", LoanAccount);
+            jsonRequest.put("service", service);
+             jsonRequest.put("firstName", firstname);
+            jsonRequest.put("lastName", lastName);
+            jsonRequest.put("PhoneNumber", PhoneNumber);
+            jsonRequest.put("nationalID", nationalID);
             Log.i("Request",jsonRequest.toString());
-
             Retrofit.Builder builder = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
@@ -87,7 +98,6 @@ public class loanApplication_page extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
-                        Log.i("DIRECT RESPONSE", response.toString());
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         JSONObject dataObject = jsonObject.getJSONObject("data");
                         statusCode = jsonObject.getString("status");
@@ -95,27 +105,28 @@ public class loanApplication_page extends AppCompatActivity {
                         Log.i("name",statusCode);
                         String message = dataObject.getString("message");
                         mess = message;
-                        showCustomDialog(loanApplication_page.this);
+                        showCustomDialog(Registration_page.this);
                         Log.i("MESSAGE", dataObject.getString("message"));
                     } catch (Exception ex) {
-                        Log.i("EXCEPT",ex.toString());
+                        Log.i("MESSAGE", "Service Unavailable.Kindly try again later");
                         statusCode = "300";
-                        mess =ex.toString();
-                        showCustomDialog(loanApplication_page.this);
+                        mess = "Service Unavailable";
+                        showCustomDialog(Registration_page.this);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     statusCode = "300";
-                    mess =t.toString();
-                    showCustomDialog(loanApplication_page.this);
+                    mess = t.toString();
+
+                    showCustomDialog(Registration_page.this);
                 }
             });
         } catch (Exception ex) {
             statusCode = "300";
             mess = ex.toString();
-            showCustomDialog(loanApplication_page.this);
+             showCustomDialog(Registration_page.this);
         }
     }
     public void showCustomDialog(final Context context) {
@@ -130,7 +141,6 @@ public class loanApplication_page extends AppCompatActivity {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
         dialog.show();
-       // Button applyloan=findViewById(R.id.btnApply);
         Button okey = dialog.findViewById(R.id.okay);
         Button cancel = dialog.findViewById(R.id.cancel);
         TextView text = dialog.findViewById(R.id.text);
@@ -139,16 +149,16 @@ public class loanApplication_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i;
-                i = new Intent(loanApplication_page.this, loanApplication_page.class);
-                if (statusCode.equalsIgnoreCase("1")) {
-                    startActivity(i);
+              // i = new Intent(MainActivity.this, Registration_page.class);
+                if (statusCode.equalsIgnoreCase("0")) {
+                   // startActivity(i);
                     dialog.dismiss();
-                    startActivity(i);
+                   // startActivity(i);
                 } else {
                     dialog.dismiss();
                 }
 
-               // Toast.makeText(loanApplication_page.this, "Yess", Toast.LENGTH_LONG);
+             //   Toast.makeText(MainActivity.this, "Yess", Toast.LENGTH_LONG);
 
             }
         });
@@ -160,4 +170,3 @@ public class loanApplication_page extends AppCompatActivity {
         });
     }
 }
-

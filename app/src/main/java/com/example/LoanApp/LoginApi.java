@@ -1,4 +1,4 @@
-package com.example.invoiceapplication;
+package com.example.LoanApp;
 
 import java.util.Map;
 
