@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     String mess;
     String statusCode;
     Button btnRegister;
-    private static final String BASE_URL = "http://192.168.1.5:7001/LoanApplication/";
+    private static final String BASE_URL = "http://192.168.1.6:7001/Login_RegistrationAPI/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i;
                 i = new Intent(MainActivity.this, Home_page.class);
-                if (statusCode.equalsIgnoreCase("0")) {
+                if (statusCode.equalsIgnoreCase("1")) {
                     startActivity(i);
                     dialog.dismiss();
                     startActivity(i);

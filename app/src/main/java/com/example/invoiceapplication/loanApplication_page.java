@@ -34,7 +34,7 @@ public class loanApplication_page extends AppCompatActivity {
     Dialog dialog;
     String mess;
     String statusCode;
-    private static final String BASE_URL = "http://192.168.1.5:7001/LoanApplication/";
+    private static final String BASE_URL = "http://192.168.1.6:7001/Login_RegistrationAPI/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -140,7 +140,7 @@ public class loanApplication_page extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i;
                 i = new Intent(loanApplication_page.this, loanApplication_page.class);
-                if (statusCode.equalsIgnoreCase("0")) {
+                if (statusCode.equalsIgnoreCase("1")) {
                     startActivity(i);
                     dialog.dismiss();
                     startActivity(i);
