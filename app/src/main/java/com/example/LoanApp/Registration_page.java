@@ -35,7 +35,7 @@ public class Registration_page extends AppCompatActivity {
     Dialog dialog;
     String mess;
     String statusCode;
-    private static final String BASE_URL = "http://192.168.1.6:7001/Login_RegistrationAPI/";
+    private static final String BASE_URL = "http://192.168.1.3:7001/Loan_App_API/";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
