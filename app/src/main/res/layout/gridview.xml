@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="5dp">
+    <TextView
+        android:id="@+id/LoanAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#7F00F"
+        android:textSize="20sp"></TextView>
+
+    <TextView
+        android:id="@+id/LoanAmount"
+        android:layout_width="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="#7F00F"
+        android:textSize="20sp"></TextView>
+
+    <TextView
+        android:id="@+id/AmountPaid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#7F00F"
+        android:textSize="20sp"></TextView>
+
+    <TextView
+        android:id="@+id/TransactionDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#7F00F"
+        android:textSize="20sp"></TextView>
+</LinearLayout>

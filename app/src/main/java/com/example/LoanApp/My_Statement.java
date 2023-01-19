@@ -1,5 +1,7 @@
 package com.example.LoanApp;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,11 +13,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONObject;
 
@@ -29,57 +28,33 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Registration_page extends AppCompatActivity {
-    Button btnSignup;
-    EditText text;
+public class My_Statement extends AppCompatActivity {
     Dialog dialog;
     String mess;
     String statusCode;
-    private static final String BASE_URL = "http://192.168.1.2:7001/Loan_App_API/";
-
+    private static final String BASE_URL = "http://192.168.1.32:7001/Loan_App_API/";
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registration_page);
-        btnSignup = findViewById(R.id.signup);
-
-        btnSignup.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_statement);
+        Button btnload=(Button) findViewById(R.id.load);
+        GridView list=(GridView) findViewById(R.id.gridview1);
+        btnload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Log.i("errrrror","her2222e");
-                 CallRetrofit();
+                CallRetrofit();
             }
         });
-
-
-
-
     }
+
     private void CallRetrofit() {
-       // Log.i("errrrror","here");
-        EditText firstname1 = findViewById(R.id.firstName);
-        String firstname=firstname1.getText().toString();
-        EditText lastName1 = findViewById(R.id.secondName);
-        String lastName=lastName1.getText().toString();
-        EditText PhoneNumber1 = findViewById(R.id.mobilenumber);
-        String PhoneNumber =PhoneNumber1.getText().toString();
-        EditText nationalID1 = findViewById(R.id.nationalID);
-        String nationalID=nationalID1.getText().toString();
-
-//        String firstname =findViewById(R.id.firstName).toString();
-//        String secondname =findViewById(R.id.secondName).toString();
-//        String mobilenumber =findViewById(R.id.mobilenumber).toString();
-//        String nationalID=findViewById(R.id.nationalID).toString();
-       // String email=findViewById(R.id.accountnumber3).toString();
-        String service = "registration";
-
+        String service = "apply loan";
+        //String LoanAccount="";
         JSONObject jsonRequest = new JSONObject();
         try {
-            jsonRequest.put("service", service);
-             jsonRequest.put("firstName", firstname);
-            jsonRequest.put("lastName", lastName);
-            jsonRequest.put("PhoneNumber", PhoneNumber);
-            jsonRequest.put("nationalID", nationalID);
+            jsonRequest.put("service",service);
             Log.i("Request",jsonRequest.toString());
+
             Retrofit.Builder builder = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create());
@@ -98,6 +73,7 @@ public class Registration_page extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
+                        Log.i("DIRECT RESPONSE", response.toString());
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         JSONObject dataObject = jsonObject.getJSONObject("data");
                         statusCode = jsonObject.getString("status");
@@ -105,30 +81,31 @@ public class Registration_page extends AppCompatActivity {
                         Log.i("name",statusCode);
                         String message = dataObject.getString("message");
                         mess = message;
-                        showCustomDialog(Registration_page.this);
+                        showCustomDialog(My_Statement.this);
                         Log.i("MESSAGE", dataObject.getString("message"));
                     } catch (Exception ex) {
-                        Log.i("MESSAGE", "Service Unavailable.Kindly try again later");
+                        Log.i("EXCEPT",ex.toString());
                         statusCode = "300";
-                        mess = "Service Unavailable";
-                        showCustomDialog(Registration_page.this);
+                        mess =ex.toString();
+                        showCustomDialog(My_Statement.this);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     statusCode = "300";
-                    mess = t.toString();
-
-                    showCustomDialog(Registration_page.this);
+                    mess =t.toString();
+                    showCustomDialog(My_Statement.this);
                 }
             });
         } catch (Exception ex) {
             statusCode = "300";
             mess = ex.toString();
-             showCustomDialog(Registration_page.this);
+            showCustomDialog(My_Statement.this);
         }
     }
+
+
     public void showCustomDialog(final Context context) {
         final Dialog dialog = new Dialog(context);
         /// Toast.makeText(MainActivity.this, "Client will provide this ☺", Toast.LENGTH_SHORT).show();
@@ -141,6 +118,7 @@ public class Registration_page extends AppCompatActivity {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         window.setGravity(Gravity.CENTER);
         dialog.show();
+        // Button applyloan=findViewById(R.id.btnApply);
         Button okey = dialog.findViewById(R.id.okay);
         Button cancel = dialog.findViewById(R.id.cancel);
         TextView text = dialog.findViewById(R.id.text);
@@ -149,16 +127,16 @@ public class Registration_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i;
-              // i = new Intent(MainActivity.this, Registration_page.class);
-                if (statusCode.equalsIgnoreCase("0")) {
-                   // startActivity(i);
+                i = new Intent(My_Statement.this, loanApplication_page.class);
+                if (statusCode.equalsIgnoreCase("1")) {
+                    startActivity(i);
                     dialog.dismiss();
-                   // startActivity(i);
+                    startActivity(i);
                 } else {
                     dialog.dismiss();
                 }
 
-             //   Toast.makeText(MainActivity.this, "Yess", Toast.LENGTH_LONG);
+                // Toast.makeText(loanApplication_page.this, "Yess", Toast.LENGTH_LONG);
 
             }
         });

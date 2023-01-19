@@ -11,7 +11,7 @@ import android.widget.Button;
 public class Home_page extends AppCompatActivity {
     Dialog dialog;
     Button apply;
-    private static final String BASE_URL = "http://192.168.1.3:7001/Loan_App_API/";
+    private static final String BASE_URL = "http://192.168.1.2:7001/Loan_App_API/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

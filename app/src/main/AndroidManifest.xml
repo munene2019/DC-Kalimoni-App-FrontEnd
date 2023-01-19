@@ -13,7 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".loanApplication_page"></activity>
+        <activity
+            android:name=".Statement"
+            android:exported="false" />
+        <activity
+            android:name=".My_Statement"
+            android:exported="false" />
+        <activity android:name=".loanApplication_page" />
         <activity android:name=".Home_page" />
         <activity
             android:name=".Registration_page"
