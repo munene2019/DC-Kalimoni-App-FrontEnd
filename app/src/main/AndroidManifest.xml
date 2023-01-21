@@ -14,6 +14,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".PayLoan"
+            android:exported="false" />
+        <activity
             android:name=".Statement"
             android:exported="false" />
         <activity

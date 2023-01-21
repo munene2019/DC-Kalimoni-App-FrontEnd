@@ -2,6 +2,7 @@ package com.example.LoanApp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ public class Home_page extends AppCompatActivity {
     Dialog dialog;
     Button apply;
     private static final String BASE_URL = "http://192.168.1.2:7001/Loan_App_API/";
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,16 @@ public class Home_page extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i;
                 i= new Intent(Home_page.this, loanApplication_page.class);
+                startActivity(i);
+            }
+        });
+
+        apply=findViewById(R.id.payloan);
+        apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i;
+                i= new Intent(Home_page.this, PayLoan.class);
                 startActivity(i);
             }
         });
