@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     String mess;
     String statusCode;
     Button btnRegister;
-    private static final String BASE_URL = "http://192.168.1.2:7001/Loan_App_API/";
+    private static final String BASE_URL = "http://10.20.33.127:7001/Loan_App_API/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

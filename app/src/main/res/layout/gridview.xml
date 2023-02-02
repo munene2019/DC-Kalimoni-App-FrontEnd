@@ -9,27 +9,27 @@
         android:id="@+id/LoanAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#7F00F"
+        android:textColor="@color/shrineColorPrimary"
         android:textSize="20sp"></TextView>
 
     <TextView
         android:id="@+id/LoanAmount"
         android:layout_width="10dp"
         android:layout_height="wrap_content"
-        android:textColor="#7F00F"
+        android:textColor="@color/shrineColorPrimary"
         android:textSize="20sp"></TextView>
 
     <TextView
         android:id="@+id/AmountPaid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#7F00F"
+        android:textColor="@color/shrineColorPrimary"
         android:textSize="20sp"></TextView>
 
     <TextView
         android:id="@+id/TransactionDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#7F00F"
+        android:textColor="@color/shrineColorPrimary"
         android:textSize="20sp"></TextView>
 </LinearLayout>

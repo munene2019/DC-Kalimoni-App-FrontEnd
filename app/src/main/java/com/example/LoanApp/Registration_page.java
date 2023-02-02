@@ -35,7 +35,7 @@ public class Registration_page extends AppCompatActivity {
     Dialog dialog;
     String mess;
     String statusCode;
-    private static final String BASE_URL = "http://192.168.1.2:7001/Loan_App_API/";
+    private static final String BASE_URL = "http://10.20.33.127:7001/Loan_App_API/";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +64,8 @@ public class Registration_page extends AppCompatActivity {
         String PhoneNumber =PhoneNumber1.getText().toString();
         EditText nationalID1 = findViewById(R.id.nationalID);
         String nationalID=nationalID1.getText().toString();
+        EditText Pin1 = findViewById(R.id.Pin);
+        String Pin=Pin1.getText().toString();
 
 //        String firstname =findViewById(R.id.firstName).toString();
 //        String secondname =findViewById(R.id.secondName).toString();
@@ -79,6 +81,7 @@ public class Registration_page extends AppCompatActivity {
             jsonRequest.put("lastName", lastName);
             jsonRequest.put("PhoneNumber", PhoneNumber);
             jsonRequest.put("nationalID", nationalID);
+            jsonRequest.put("Pin", Pin);
             Log.i("Request",jsonRequest.toString());
             Retrofit.Builder builder = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
