@@ -140,7 +140,6 @@ public class PayLoan extends AppCompatActivity {
                 } else {
                     dialog.dismiss();
                 }
-
                 // Toast.makeText(loanApplication_page.this, "Yess", Toast.LENGTH_LONG);
 
             }
