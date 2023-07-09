@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("MESSAGE", dataObject.getString("message"));
                     } catch (Exception ex) {
                         Log.i("EXCEPT",ex.toString());
-                        statusCode = "300";
+                        statusCode = "1";
                         mess =ex.toString();
                         showCustomDialog(MainActivity.this);
                     }
